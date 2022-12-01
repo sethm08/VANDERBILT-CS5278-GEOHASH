@@ -1,4 +1,4 @@
-package edu.vanderbilt.cs.live2;
+package edu.vanderbilt.cs.live2;	// Creating the java package
 
 
 
@@ -27,6 +27,24 @@ public class GeoHash {
 	 * GeoHash Spatial Precision:
 	 *
 	 * https://releases.dataone.org/online/api-documentation-v2.0.1/design/geohash.html
+	 */
+
+	 /* Starting at 7:10 pm : Reading through directions in following methods
+		- Encuraged to modify the main() method
+			-Note java method vs function difference review:
+				-Function: A reusable piece of code. Can have input data on which can operate with (arguments) and can return data of specified return type
+				-Method: Similar to a function but has two constraints: 1) Methods are associated or related to the instance of the object it is called using
+					2) Methods are limited to operating on data inside the class of which the method is contained
+		- Take a step back and install/create a repository for trackable changes: done
+		- Dissapointing, but have to start dinner (7:20pm)...chicken in the oven (7:26pm)
+		- Two public static values LATITUDE_RANGE and LONGITUDE_RANGE defined below upon creation of a GeoHash class object
+		- Open and review information on the GeoHashes:
+			-Mapzen:
+				- History: Origionally created by Gustavo Niemeyer in '08 and availiable in a public domain
+					origionally created as part of a url-shortening service, it's functionality has progressed to
+					use in unique identifiers, spacial indexing, searching, etc.
+				- Function: elegant method of geograpic encoding by reducing 2D longitude/latitude values to a single alphanumeric string
+					- Each additional character adds precision to the location.....and time for more dinner making (7:42pm)
 	 */
 
 
