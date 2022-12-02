@@ -45,6 +45,19 @@ public class GeoHash {
 					use in unique identifiers, spacial indexing, searching, etc.
 				- Function: elegant method of geograpic encoding by reducing 2D longitude/latitude values to a single alphanumeric string
 					- Each additional character adds precision to the location.....and time for more dinner making (7:42pm)
+					- Back at the computer (12/1 @ 6:14pm)...
+					- Constructing a geohash: geohashes are a type of grid spatial index - recursively dividing the surface of earth into smaller and smaller grids with each additional bit (do they mean character?)
+						-ex: divide an surface/area in half with the initial bit (1/0 value), divide each of those halfs in half again, with the second bit value referencing to which half of the upper area you are
+						     directed toward and so on resulting in a binary sequence (10011011100010101100011101011010111) which then gets converted to the 'geohas base 32 character map'
+						- pretty cool how it automatically makes similar locations have similar initial values
+			-Wikipedia:
+				- note, the 32 bit character map carries integers 0-9 and all lowercase letters EXCEPT  'a', 'i', 'l', and 'o'
+				- Careful rounding.... min <= rounded_value <= max
+
+		- Cool stuff to learn about, time to begin looking into the functions and what the objective(s) of this will be
+		- Reading through how this is intended to be tested...
+			- Test inputs/structure defined in GeoHasTest.java
+			- Applies juint (not familiar with)
 	 */
 
 
