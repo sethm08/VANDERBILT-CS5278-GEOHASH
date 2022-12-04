@@ -58,6 +58,14 @@ public class GeoHash {
 		- Reading through how this is intended to be tested...
 			- Test inputs/structure defined in GeoHasTest.java
 			- Applies juint (not familiar with)
+		- Picking it back up at 8:44 am on Saturday... Have covered the basics behind geohashing, going to take the next step in arranging the order in which to approach the problem
+			- geohash1D method:
+				- Inputs:	valueToHash: input value provided as a double
+							valueRange: input value provided as a double array
+							bitsOfPrecision: input value provided as integer
+				- Outputs:	single boolean array
+				- Function: Convert the input value (valueToHash) and precision constraints to convert with continued precision
+							via a recursion until the precision defined as bitsOfPrecision is met.
 	 */
 
 
@@ -88,6 +96,9 @@ public class GeoHash {
 		//
 		// We are approximating "bits" with a boolean array to make things simpler.
 		//
+
+		System.out.println("hash " + valueToHash + " [" + valueRange[0] + ", " + valueRange[1] + "]");
+
 		return null;
 	}
 
