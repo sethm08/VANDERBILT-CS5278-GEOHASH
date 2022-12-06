@@ -66,11 +66,17 @@ public class GeoHash {
 				- Outputs:	single boolean array
 				- Function: Convert the input value (valueToHash) and precision constraints to convert with continued precision
 							via a recursion until the precision defined as bitsOfPrecision is met.
+		- Picking it back up now that I'm sitting at a hotel in Nashville (Vanderbilt isn't far down the road) @ 9:20 pm
+			- Doing some  background checks - confirming both Java and Gradle are workign correctly since I'm on my work laptop rather than my home desktop.
+				- Seems to be working!
+				- Back to geohash1D method....
 	 */
 
 
 	public static final double[] LATITUDE_RANGE = { -90, 90 };
 	public static final double[] LONGITUDE_RANGE = { -180, 180 };
+
+	public static boolean initialBit = true;
 
 	public static boolean[] geohash1D(double valueToHash, double[] valueRange, int bitsOfPrecision) {
 		// It may help you to print out what is happening:
@@ -96,10 +102,29 @@ public class GeoHash {
 		//
 		// We are approximating "bits" with a boolean array to make things simpler.
 		//
+		double valueInput = valueToHash;
+		double[] bounds = {valueRange[0], valueRange[1]};
+		boolean bitArray[] = new boolean[bitsOfPrecision];
+		boolean bit = false;
 
-		System.out.println("hash " + valueToHash + " [" + valueRange[0] + ", " + valueRange[1] + "]");
+		for (int i = 0; i < bitsOfPrecision; i++){
+			
+			double midpoint = (bounds[0] + bounds[1]) / 2;
 
-		return null;
+			System.out.println("hash " + valueToHash + " [" + bounds[0] + ", " + bounds[1] + "] midpoint " + midpoint);
+
+			if (valueInput >= midpoint) {
+				bit = true;
+				bounds[0] = midpoint;
+			}
+			else {
+				bit = false;
+				bounds[1] = midpoint;
+			}
+			bitArray[i] = bit;
+		}
+
+		return bitArray;
 	}
 
 	public static boolean[] geohash2D(double v1, double[] v1range, double v2, double[] v2range, int bitsOfPrecision) {
@@ -111,8 +136,26 @@ public class GeoHash {
 		//
 		// The resulting geohash should have the number of bits specified by bitsOfPrecision.
 		//
+		boolean bitArray[] = new boolean[bitsOfPrecision];
 
-		return null;
+		int nPlaces = bitsOfPrecision/2;
+
+		boolean[] bitArray2 = geohash1D(v2, v2range, nPlaces);
+
+		if (bitsOfPrecision % 2 != 0){
+			nPlaces = bitsOfPrecision/2+1;
+		}
+
+		boolean[] bitArray1 = geohash1D(v1, v1range, nPlaces);
+		
+		for (int i = 0; i < nPlaces; i++){
+			bitArray[2*i] = bitArray1[i];
+			if (i < bitArray2.length) {
+				bitArray[2*i+1] = bitArray2[i];
+			}
+		}
+
+		return bitArray;
 	}
 
 	public static boolean[] geohash(double lat, double lon, int bitsOfPrecision) {
@@ -138,7 +181,11 @@ public class GeoHash {
 	// Faux testing for now
 	public static void assertEquals(String v1, String v2) {
 		if(!v1.contentEquals(v2)) {
+			System.out.println("   Failure: v1 " + v1 + " v2 "+ v2);
 			throw new RuntimeException(v1 + " != " + v2);
+		}
+		else{
+			System.out.println("   Success!");
 		}
 	}
 
